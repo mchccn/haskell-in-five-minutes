@@ -66,7 +66,7 @@ sort "cursorsdottsx" -- "cdoorrsssttux":: [Char]
   My nemesis is 28 years of age: (28,"chirs")
 -}
 
-(16, "cursorsdottsx") -- (16,"cursorsdottsx"):: Num t => (t, [Char])
+(16, "cdoorrsssttux") -- (16,"cdoorrsssttux"):: Num t => (t, [Char])
 
 {-
   We'll keep them safe, don't worry about it.
@@ -78,13 +78,209 @@ sort "cursorsdottsx" -- "cdoorrsssttux":: [Char]
   - (1,"hats",23/35)
   - ("Shaggy","Daphnie","Velma")
   
-  Actually, let's say our villain is (16,"cursorsdottsx"), how do you get their age?
+  Actually, let's say our villain is (16,"cdoorrsssttux"), how do you get their age?
 
-  fst (16,"cursorsdottsx")
+  fst (16,"cdoorrsssttux")
 -}
 
-fst (16, "cursorsdottsx") -- 16:: Num a => a
+fst (16, "cdoorrsssttux") -- 16:: Num a => a
 
 {-
+  Lesson 2 done! Wow, great job!
+  
+  Good job! You got the age back from the tuple! Didn't even break a sweat, did you? The fst function just gets the first value. It's called "fst" because it's used a lot in Haskell so it really needs to be short!
 
+  Time to take a rest and see what you learned:
+
+  Functions can be used on lists of any type.
+  We can stuff values into tuples.
+  Getting the values back from tuples is easy.
+  Now let's say you want to use a value more than once, how would you do it? To make our lives easier, we can say:
+
+  let x = 4 in x * x
 -}
+
+let x = 4 in x * x -- 16:: Num a => a
+
+{-
+  Let them eat cake
+  You just bound a variable. That is, you bound x to the expression 4, and then you can write x in some code (the body) and it will mean the same as if you'd written 4.
+
+  It's like this: let var = expression in body
+
+  The in part just separates the expression from the body.
+  For example try: let x = 8 * 10 in x + x
+
+  So if we wanted to get the age of our villain, we could do:
+
+  let villain = (28,"cdoorrsssttux") in fst villain
+-}
+
+let villain = (28,"cdoorrsssttux") in fst villain -- 28:: Num a => a
+
+{-
+  Basics over, let's go!
+  Next, let's take a short detour to learn about syntactic sugar. Try typing this out:
+
+  'a' : []
+
+  Or skip to lesson4 to learn about functions, the meat of Haskell!
+-}
+
+'a' : []
+
+{-
+  You constructed a list!
+  Well done, that was tricky syntax. You used the (:) function. It takes two values, some value and a list, and constructs a new list out of them. We call it 'cons' for short.
+
+  'a' is the character 'a', [] is an empty list. So tacking 'a' at the start of an empty list just makes a list ['a']!
+
+  But thankfully we don't have to type out 'a' : 'b' : [] every time we want to make a list of characters; we can use syntactic sugar and just write ['a','b']. Don't believe me, check this!
+
+  'a' : 'b' : [] == ['a','b']
+-}
+
+'a' : 'b' : [] == ['a','b'] -- True :: Bool
+
+{-
+  You're on fire!
+  You're handling this syntax really well, nice!
+
+  You just got a boolean value back, and it said True. That means they're equal!
+
+  One final demonstration on syntactic sugar for now:
+
+  ['a','b','c'] == "abc"
+-}
+
+['a','b','c'] == "abc" -- True :: Bool
+
+{-
+  Lesson 3 over! Syntactic sugar is sweet
+  Let's have a gander at what you learned:
+
+  In 'a' : [], : is really just another function, just clever looking.
+  Pretty functions like this are written like (:) when you talk about them.
+  A list of characters ['a','b'] can just be written "ab". Much easier!
+  Phew! You're getting pretty deep! Your arch nemesis, cdoorrsssttux, is gonna try to steal your mojo! Let's learn a bit more about functions and passing them around. Try this:
+
+  map (+1) [1..5]
+-}
+
+map (+1) [1..5] -- [2,3,4,5,6]:: (Enum b, Num b) => [b]
+
+{-
+  Functions [of a Geisha]
+  Here's where the magic begins!
+
+  You just passed the (+1) function to the map function.
+
+  You can try other things like (remember: click to insert them):
+
+  - map (*99) [1..10]
+  - map (/5) [13,24,52,42]
+  - filter (>5) [62,3,25,7,1,9]
+  
+  Note that a tuple is different to a list because you can do this:
+
+  (1,"George")
+-}
+
+(1,"George") -- (1,"George"):: Num t => (t, [Char])
+
+  {-
+  Lists and Tuples
+  You can only have a list of numbers or a list of characters, whereas in a tuple you can throw anything in!
+
+  We've also seen that you can make a new list with (:) that joins two values together, like:
+
+  1 : [2,3]
+
+  But we can't do this with tuples! You can only write a tuple and then look at what's inside. You can't make new ones on the fly like a list.
+
+  Let's write our own functions! It's really easy. How about something simple:
+
+  let square x = x * x in square 10
+-}
+
+let square x = x * x in square 10 -- 100:: Num a => a
+
+{-
+  Let there be functions
+  Nice one! I think you're getting used to the let syntax.
+
+  You defined a function. You can read it as, as for a given parameter called x, square of x is x * x.
+
+  Some others you can try are:
+
+  - let add1 x = x + 1 in add1 5
+  - let second x = snd x in second (3,4)
+  - Let's go crazy and use our square function with map:
+
+  let square x = x * x in map square [1..10]
+-}
+
+let square x = x * x in map square [1..10] -- [1,4,9,16,25,36,49,64,81,100]:: (Enum b, Num b) => [b]
+
+{-
+  Let there be functions
+  That's so cool! You described a simple function square and then you just passed it to another function (map) and got back [1,4,9,16,25,36,49,64,81,100], exactly what you expected!
+
+  Haskell is pretty good at composing things together like this. Some other things you can try are:
+
+  - let add1 x = x + 1 in map add1 [1,5,7]
+  - let take5s = filter (==5) in take5s [1,5,2,5,3,5]
+  - let take5s = filter (==5) in map take5s [[1,5],[5],[1,1]]
+  
+  Did you get back what you expected?
+
+  One more example for text; how do you upcase a letter?
+
+  toUpper 'a'
+-}
+
+toUpper 'a' -- 'A' :: Char
+
+{-
+  Exercise time!
+  Easy! Remember: characters are written like 'a' and strings (lists of characters) are written like "a".
+
+  I need you to use toUpper capitalise my whole name, "Chris". Give it a try. You can do it, I believe in you!
+
+  Spoiler: map toUpper "Chris"
+-}
+
+map toUpper "chris"
+
+{-
+  Lesson 4 complete!
+  Brilliant! You're making excellent progress! You just passed toUpper to map. No problem.
+
+  Let's go over what you've learned in this lesson:
+
+  Functions like map take other functions as parameters.
+  Functions like (+1), (>5) and square can be passed to other functions.
+  Defining functions is just a case of writing what to do with the parameters.
+  Let's check out pattern matching; a way to get values from other values using patterns. Try this:
+
+  let (a,b) = (10,12) in a * 2
+-}
+
+let (a, b) = (10, 12) in a * 2 -- 20:: Num a => a
+
+  {-
+  Pattern matching!
+  Jolly good show!
+
+  So you had a value (10,12) and matched it against a pattern (a,b), then you were able to do stuff with the a and b!
+
+  Note: Pattern matching (a,b) against (1,2) to get the a is the same as doing fst (1,2), like you did in step7!
+
+  A pattern always matches the way the value was originally constructed. Remember that "abc" is syntactic sugar for 'a' : 'b' : 'c' : [].
+
+  So you can get the characters from a string with patterns:
+
+  let (a:b:c:[]) = "xyz" in a
+-}
+
+let (a:b:c:[]) = "xyz" in a -- 'x' :: Char
