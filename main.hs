@@ -268,7 +268,7 @@ map toUpper "chris"
 
 let (a, b) = (10, 12) in a * 2 -- 20:: Num a => a
 
-  {-
+{-
   Pattern matching!
   Jolly good show!
 
@@ -284,3 +284,58 @@ let (a, b) = (10, 12) in a * 2 -- 20:: Num a => a
 -}
 
 let (a:b:c:[]) = "xyz" in a -- 'x' :: Char
+
+{-
+  Ignorance is bliss
+  You're getting into tricky syntax, huh? I know you can handle it!
+
+  If you just want some of the values, you can ignore the others with _ (underscore) like this:
+
+  let (a:_:_:_) = "xyz" in a
+
+  In fact, (a:b:c:d) is short-hand for (a:(b:(c:d))), so you can just ignore the rest in one go:
+
+  let (a:_) = "xyz" in a
+-}
+
+let (a:_) = "xyz" in a -- 'x':: Char
+
+{-
+  Show me the money!
+  Try to get the 'a' value from this value using pattern matching:
+
+  (10,"abc")
+
+  Spoiler: let (_,(a:_)) = (10,"abc") in a
+-}
+
+let (_,(a:_)) = (10, "abc") in a -- 'a':: Char
+
+{-
+  Perfetto!
+  Wizard! I think you've got pattern-matching down.
+
+  If you're still a bit unsure, here are some other things you can try:
+
+  let _:_:c:_ = "abcd" in c
+  let [a,b,c] = "cat" in (a,b,c)
+  You can also grab a whole value and pattern match on it (have your cake and eat it too):
+
+  let abc@(a,b,c) = (10,20,30) in (abc,a,b,c)
+-}
+
+let abc@(a, b, c) = (10, 20, 30) in (abc, a, b, c) -- ((10, 20, 30), 10, 20, 30):: (Num t, Num t1, Num t2) => ((t, t1, t2), t, t1, t2)
+
+{-
+  And that's the end of that chapter
+  That was easy, right?
+
+  Let's go over what you've learned in this lesson:
+
+  - Values are pattern matched, or deconstructed, by writing however they were constructed.
+  - Patterns let you use the values that you match.
+  - You can ignore whichever values you want.
+  - You can pattern match and keep hold of the original value too.
+  
+  Okay! That's all for now. It's time to dig into some documentation!
+-}
